@@ -50,7 +50,7 @@ const DIST_JS_DIR = DIST_DIR + '/js';
 const TSX_RE = /\.tsx?$/;
 const build = async () => {
     for (const key of Object.keys(require.cache)) {
-        if (key.matches(/ssr-test[\\\/](src|routes)/)) {
+        if (key.match(/ssr-test[\\\/](src|routes)/)) {
             delete require.cache[key];
         }
     }
