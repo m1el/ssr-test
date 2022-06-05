@@ -2,14 +2,10 @@ import fs from 'fs';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 import React from 'react';
-import spack from '@swc/core/spack'
-import spackTypes from '@swc/core/types';
-import crypto from "crypto";
+import crypto from 'crypto';
 import ReactDOMServer from 'react-dom/server';
 import { build as esbuild } from 'esbuild/lib/main';
 import { ScriptContext } from './script'
-
-//const esbuild = buildFactory();
 
 interface IRouteProps {
     relPath: string
