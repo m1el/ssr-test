@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { writeFile } from 'fs/promises';
+import { rm, writeFile } from 'fs/promises';
 import path from 'path';
 import React from 'react';
 import crypto from 'crypto';
@@ -50,6 +50,7 @@ const DYNAMIC_DIR = 'src/dynamic';
 const DIST_JS_DIR = DIST_DIR + '/js';
 const TSX_RE = /\.tsx?$/;
 const build = async () => {
+    await rm(DIST_DIR, { recursive: true });
     const dynamicMap = new Map();
     for (const { root, files } of walkDir(DYNAMIC_DIR)) {
         let relPath = path.relative(DYNAMIC_DIR, root);
