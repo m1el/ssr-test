@@ -1,0 +1,24 @@
+{
+      "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "lib": [
+          "es2015",
+          "dom"
+      ],
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "outDir": "build",
+      "jsx": "react",
+      "allowJs": true
+  },
+  "include": [
+      "build.ts", "routes/**/*.{ts,tsx}"
+  ],
+  "exclude": [
+      "node_modules"
+  ]
+}
+
