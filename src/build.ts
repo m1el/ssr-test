@@ -5,7 +5,8 @@ import React from 'react';
 import crypto from 'crypto';
 import ReactDOMServer from 'react-dom/server';
 import { build as esbuild } from 'esbuild/lib/main';
-import { ScriptContext } from './script'
+import { ScriptContext } from './script';
+import debounce from 'debounce';
 
 interface IRouteProps {
     relPath: string
@@ -99,3 +100,10 @@ const build = async () => {
 };
 
 build();
+if (process.argv[2] === 'watch') {
+    const onWatch = debounce(() => {
+        build();
+    }, 300);
+    fs.watch('routes', { recursive: true }, onWatch);
+    fs.watch('src', { recursive: true }, onWatch);
+}

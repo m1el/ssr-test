@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "ts-node src/build.ts",
+    "watch": "ts-node src/build.ts watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "@types/react": "^18.0.11",
     "@types/react-dom": "^18.0.5",
+    "debounce": "^1.2.1",
     "esbuild": "^0.14.42",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

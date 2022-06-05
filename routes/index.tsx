@@ -5,9 +5,10 @@ export const Page = ({path}) => {
        <html>
            <head>
                <Script async src="dynamic/test.tsx" />
-               <title>Test SSR path={path}</title>
+               <title>Test SSR path={path} boo</title>
            </head>
            <body>
+               <a href="send_thing.html">Send something to me!</a>
                Hello world from static!
                <div id="root"></div>
            </body>
@@ -16,9 +17,3 @@ export const Page = ({path}) => {
 };
 
 export default Page;
-export const getStaticPaths = async () => {
-    return [
-        '/hello',
-        '/world',
-    ]
-};
