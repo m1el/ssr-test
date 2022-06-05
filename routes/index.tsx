@@ -5,7 +5,7 @@ export const Page = ({path}) => {
        <html>
            <head>
                <Script async src="dynamic/test.tsx" />
-               <title>Hello</title>
+               <title>foobar</title>
            </head>
            <body>
                <a href="send_thing.html">Send something to me!</a>

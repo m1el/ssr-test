@@ -5,7 +5,6 @@ import React from 'react';
 import crypto from 'crypto';
 import ReactDOMServer from 'react-dom/server';
 import { build as esbuild } from 'esbuild/lib/main';
-import { ScriptContext } from './script';
 import debounce from 'debounce';
 
 interface IRouteProps {
@@ -50,6 +49,14 @@ const DYNAMIC_DIR = 'src/dynamic';
 const DIST_JS_DIR = DIST_DIR + '/js';
 const TSX_RE = /\.tsx?$/;
 const build = async () => {
+    for (const key of Object.keys(require.cache)) {
+        if (key.indexOf('ssr-test\\src') > -1
+            || key.indexOf('ssr-test\\routes') > -1) {
+            console.log(key);
+            delete require.cache[key];
+        }
+    }
+    const { ScriptContext } = await import('./script');
     await rm(DIST_DIR, { recursive: true });
     const dynamicMap = new Map();
     for (const { root, files } of walkDir(DYNAMIC_DIR)) {
@@ -74,7 +81,6 @@ const build = async () => {
         }
         console.log(dynamicMap);
     }
-
     for (const { root, files } of walkDir(ROUTES_DIR)) {
         let relPath = path.relative(ROUTES_DIR, root);
         if (relPath) relPath += '/';
@@ -84,6 +90,7 @@ const build = async () => {
             if (!file.endsWith('.tsx')) { continue; }
             const baseName = file.replace(/\.tsx$/, '');
             const inFile = path.relative(__dirname, root) + '/' + baseName;
+
             const { default: render, getStaticPaths } = (await import (inFile) as unknown as IRoutePage);
             const paths = getStaticPaths && await getStaticPaths() || ['/' + relPath + baseName];
             for (const staticPath of paths) {
